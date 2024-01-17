@@ -14,6 +14,23 @@ let codeSchool = {
     }
 };
 
+// ----- teachers -----
+let shigeru = {
+    name: 'Shigeru Miyamoto',
+    subjects: [],
+    addSubject: function(subject){
+        this.subjects.push(subject);
+    }
+};
+
+let bill = {
+    name: 'Bill Gates',
+    subjects: [],
+    addSubject: function(subject){
+        this.subjects.push(subject);
+    }
+};
+
 // ----- subjects -----
 let assembly6502 = {
     name: 'Assembly 6502',
@@ -24,6 +41,10 @@ let assembly6502 = {
     },
     addTeacher: function(teacher){
         this.teacher = teacher;
+    },
+    removeStudent: function(student){
+        let index = this.students.indexOf(student);
+        this.students.splice(index, 1);
     }
 };
 
@@ -36,6 +57,10 @@ let fortran = {
     },
     addTeacher: function(teacher){
         this.teacher = teacher;
+    },
+    removeStudent: function(student){
+        let index = this.students.indexOf(student);
+        this.students.splice(index, 1);
     }
 };
 
@@ -48,6 +73,10 @@ let basic = {
     },
     addTeacher: function(teacher){
         this.teacher = teacher;
+    },
+    removeStudent: function(student){
+        let index = this.students.indexOf(student);
+        this.students.splice(index, 1);
     }
 };
 
@@ -62,9 +91,8 @@ let john = {
         subject.addStudent(this);
     },
     quitSubject: function(subject){
-        let index = this.subjects.indexOf(fortran);
+        let index = this.subjects.indexOf(subject);
         this.subjects.splice(index, 1);
-        console.log(index);
     }
 };
 
@@ -82,6 +110,9 @@ for(subject in john.subjects){
     console.log(john.subjects[subject].name);
 }
 
+fortran.removeStudent(john);
+
+
 let eric = {
     name: 'Eric',
     age: 24,
@@ -90,6 +121,11 @@ let eric = {
     enlistToSubject: function(subject){
         this.subjects.push(subject);
         subject.addStudent(this);
+    },
+    quitSubject: function(subject){
+        let index = this.subjects.indexOf(subject);
+        this.subjects.splice(index, 1);
+        subject.removeStudent(this);
     }
 };
 
@@ -112,6 +148,11 @@ let lisa = {
     enlistToSubject: function(subject){
         this.subjects.push(subject);
         subject.addStudent(this);
+    },
+    quitSubject: function(subject){
+        let index = this.subjects.indexOf(subject);
+        this.subjects.splice(index, 1);
+        subject.removeStudent(this);
     }
 };
 
@@ -123,29 +164,11 @@ let alex = {
     enlistToSubject: function(subject){
         this.subjects.push(subject);
         subject.addStudent(this);
+    },
+    quitSubject: function(subject){
+        let index = this.subjects.indexOf(subject);
+        this.subjects.splice(index, 1);
+        subject.removeStudent(this);
     }
 };
 
-// ----- teachers -----
-let shigeru = {
-    name: 'Shigeru Miyamoto',
-    subjects: [],
-    addSubject: function(subject){
-        this.subjects.push(subject);
-    }
-};
-
-let bill = {
-    name: 'Bill Gates',
-    subjects: [],
-    addSubject: function(subject){
-        this.subjects.push(subject);
-    }
-};
-/*
-shigeru.addSubject(assembly6502);
-console.log(shigeru.name);
-for(sub in shigeru.subjects){
-    console.log(shigeru.subjects[sub].name);
-}
-*/
