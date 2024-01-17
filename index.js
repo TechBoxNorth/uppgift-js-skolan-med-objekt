@@ -11,6 +11,10 @@ let codeSchool = {
     },
     addStudent: function(student){
         this.students.push(student);
+    },
+    fireTeacher: function(teacher){
+        let index = this.teachers.indexOf(teacher);
+        this.teachers.splice(index, 1);
     }
 };
 
@@ -20,6 +24,7 @@ let shigeru = {
     subjects: [],
     addSubject: function(subject){
         this.subjects.push(subject);
+        subject.addTeacher(this);
     }
 };
 
@@ -28,6 +33,7 @@ let bill = {
     subjects: [],
     addSubject: function(subject){
         this.subjects.push(subject);
+        subject.addTeacher(this);
     }
 };
 
@@ -45,6 +51,9 @@ let assembly6502 = {
     removeStudent: function(student){
         let index = this.students.indexOf(student);
         this.students.splice(index, 1);
+    },
+    removeTeacher: function(){
+        this.teacher = {};
     }
 };
 
@@ -61,6 +70,9 @@ let fortran = {
     removeStudent: function(student){
         let index = this.students.indexOf(student);
         this.students.splice(index, 1);
+    },
+    removeTeacher: function(){
+        this.teacher = {};
     }
 };
 
@@ -77,6 +89,9 @@ let basic = {
     removeStudent: function(student){
         let index = this.students.indexOf(student);
         this.students.splice(index, 1);
+    },
+    removeTeacher: function(){
+        this.teacher = {};
     }
 };
 
@@ -96,23 +111,6 @@ let john = {
     }
 };
 
-john.enlistToSubject(assembly6502);
-john.enlistToSubject(fortran);
-john.enlistToSubject(basic);
-
-for(subject in john.subjects){
-    console.log(john.subjects[subject].name);
-}
-
-john.quitSubject(fortran);
-
-for(subject in john.subjects){
-    console.log(john.subjects[subject].name);
-}
-
-fortran.removeStudent(john);
-
-
 let eric = {
     name: 'Eric',
     age: 24,
@@ -125,7 +123,6 @@ let eric = {
     quitSubject: function(subject){
         let index = this.subjects.indexOf(subject);
         this.subjects.splice(index, 1);
-        subject.removeStudent(this);
     }
 };
 
@@ -137,6 +134,10 @@ let jenny = {
     enlistToSubject: function(subject){
         this.subjects.push(subject);
         subject.addStudent(this);
+    },
+    quitSubject: function(subject){
+        let index = this.subjects.indexOf(subject);
+        this.subjects.splice(index, 1);
     }
 };
 
@@ -152,7 +153,6 @@ let lisa = {
     quitSubject: function(subject){
         let index = this.subjects.indexOf(subject);
         this.subjects.splice(index, 1);
-        subject.removeStudent(this);
     }
 };
 
@@ -168,7 +168,36 @@ let alex = {
     quitSubject: function(subject){
         let index = this.subjects.indexOf(subject);
         this.subjects.splice(index, 1);
-        subject.removeStudent(this);
     }
 };
 
+// add students to the school
+function goToSchool(student){
+    codeSchool.students.push(student);
+}
+codeSchool.addStudent(john);
+codeSchool.addStudent(eric);
+codeSchool.addStudent(jenny);
+codeSchool.addStudent(lisa);
+codeSchool.addStudent(alex);
+for(student in codeSchool.students){
+    console.log(codeSchool.students[student].name);
+}
+
+// add teachers to the school
+codeSchool.addTeacher(shigeru);
+codeSchool.addTeacher(bill);
+for(teacher in codeSchool.teachers){
+    console.log(codeSchool.teachers[teacher].name);
+}
+
+// assign subjects to the teachers
+shigeru.addSubject(assembly6502);
+shigeru.addSubject(fortran);
+bill.addSubject(basic);
+
+console.log(fortran.teacher.name);
+console.log(basic.teacher.name);
+
+basic.removeTeacher();
+console.log(basic.teacher.name);
