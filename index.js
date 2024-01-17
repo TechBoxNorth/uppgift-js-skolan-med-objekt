@@ -59,11 +59,28 @@ let john = {
     subjects: [],
     enlistToSubject: function(subject){
         this.subjects.push(subject);
-        subject.students.push(this);
+        subject.addStudent(this);
+    },
+    quitSubject: function(subject){
+        let index = this.subjects.indexOf(fortran);
+        this.subjects.splice(index, 1);
+        console.log(index);
     }
 };
 
 john.enlistToSubject(assembly6502);
+john.enlistToSubject(fortran);
+john.enlistToSubject(basic);
+
+for(subject in john.subjects){
+    console.log(john.subjects[subject].name);
+}
+
+john.quitSubject(fortran);
+
+for(subject in john.subjects){
+    console.log(john.subjects[subject].name);
+}
 
 let eric = {
     name: 'Eric',
@@ -72,6 +89,7 @@ let eric = {
     subjects: [],
     enlistToSubject: function(subject){
         this.subjects.push(subject);
+        subject.addStudent(this);
     }
 };
 
@@ -82,6 +100,7 @@ let jenny = {
     subjects: [],
     enlistToSubject: function(subject){
         this.subjects.push(subject);
+        subject.addStudent(this);
     }
 };
 
@@ -92,6 +111,7 @@ let lisa = {
     subjects: [],
     enlistToSubject: function(subject){
         this.subjects.push(subject);
+        subject.addStudent(this);
     }
 };
 
@@ -102,6 +122,7 @@ let alex = {
     subjects: [],
     enlistToSubject: function(subject){
         this.subjects.push(subject);
+        subject.addStudent(this);
     }
 };
 
@@ -121,9 +142,10 @@ let bill = {
         this.subjects.push(subject);
     }
 };
-
+/*
 shigeru.addSubject(assembly6502);
 console.log(shigeru.name);
 for(sub in shigeru.subjects){
     console.log(shigeru.subjects[sub].name);
 }
+*/
