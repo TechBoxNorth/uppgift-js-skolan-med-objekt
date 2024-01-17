@@ -59,8 +59,11 @@ let john = {
     subjects: [],
     enlistToSubject: function(subject){
         this.subjects.push(subject);
+        subject.students.push(this);
     }
 };
+
+john.enlistToSubject(assembly6502);
 
 let eric = {
     name: 'Eric',
